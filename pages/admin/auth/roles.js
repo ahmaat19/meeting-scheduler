@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import withAuth from '../../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
-import useRolesHook from '../../api/roles'
+import useRolesHook from '../../../api/roles'
 import { Spinner, Pagination, Message, Confirm } from '../../../components'
 import {
   inputMultipleCheckBox,
@@ -13,8 +13,8 @@ import {
 } from '../../../utils/dynamicForm'
 import TableView from '../../../components/TableView'
 import FormView from '../../../components/FormView'
-import usePermissionsHook from '../../../utils/api/permissions'
-import useClientPermissionsHook from '../../../utils/api/clientPermissions'
+import usePermissionsHook from '../../../api/permissions'
+import useClientPermissionsHook from '../../../api/clientPermissions'
 
 const Roles = () => {
   const [page, setPage] = useState(1)
