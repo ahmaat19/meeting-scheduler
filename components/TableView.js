@@ -60,6 +60,8 @@ const TableView = (props) => {
               <th key={index}>{item}</th>
             ))}
             {table.createdAt && <th>CreatedAt</th>}
+            {table.startDate && <th>Start Date</th>}
+            {table.endDate && <th>End Date</th>}
             {table.confirmed && <th>Confirmed</th>}
             {table.blocked && <th>Blocked</th>}
             {table.auth && <th>Auth</th>}
@@ -92,6 +94,9 @@ const TableView = (props) => {
                 {table.createdAt && (
                   <td>{moment(item.createdAt).format('lll')}</td>
                 )}
+
+                {table.startDate && <td>{moment(item.start).format('lll')}</td>}
+                {table.endDate && <td>{moment(item.end).format('lll')}</td>}
 
                 {table.confirmed && (
                   <td>

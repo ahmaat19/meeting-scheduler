@@ -152,6 +152,7 @@ export const dynamicInputSelect = (args) => {
     data,
     isRequired = true,
     value,
+    multiple = false,
   } = args
 
   return (
@@ -160,6 +161,7 @@ export const dynamicInputSelect = (args) => {
       <select
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
+        multiple={multiple}
         placeholder={`${placeholder}`}
         className='form-control'
       >
@@ -322,6 +324,25 @@ export const inputDate = (args) => {
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='date'
+        placeholder={`${placeholder}`}
+        className='form-control'
+      />
+      {errors && errors[name] && (
+        <span className='text-danger'>{errors[name].message}</span>
+      )}
+    </div>
+  )
+}
+
+export const inputDateTime = (args) => {
+  const { register, placeholder, errors, name, label, isRequired = true } = args
+
+  return (
+    <div className='mb-3'>
+      <label htmlFor={name}>{label}</label>
+      <input
+        {...register(name, isRequired && { required: `${label} is required` })}
+        type='datetime-local'
         placeholder={`${placeholder}`}
         className='form-control'
       />

@@ -100,8 +100,7 @@ const Navigation = () => {
           {menus() &&
             menus().menuItems.map(
               (menu) =>
-                menu.menu === 'normal' &&
-                menu.auth === true && (
+                menu.menu === 'normal' && (
                   <li key={menu._id} className='nav-item'>
                     <Link href={menu.path}>
                       <a className='nav-link' aria-current='page'>

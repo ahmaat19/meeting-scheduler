@@ -100,6 +100,27 @@ const clientPermissions = [
     auth: true,
     description: 'User Profiles page',
   },
+  {
+    name: 'Categories',
+    path: '/categories',
+    menu: 'normal',
+    auth: true,
+    description: 'Categories page',
+  },
+  {
+    name: 'Participants',
+    path: '/participants',
+    menu: 'normal',
+    auth: true,
+    description: 'Participants page',
+  },
+  {
+    name: 'Meetings',
+    path: '/meetings',
+    menu: 'normal',
+    auth: true,
+    description: 'Meetings page',
+  },
 ]
 
 const permissions = [
@@ -298,6 +319,105 @@ const permissions = [
     auth: true,
     name: 'ClientPermissions',
     method: 'DELETE',
+  },
+
+  // categories endpoint
+  {
+    description: 'Get All Categories',
+    route: '/api/categories',
+    auth: true,
+    name: 'Categories',
+    method: 'GET',
+  },
+  {
+    description: 'Create Category',
+    route: '/api/categories',
+    auth: true,
+    name: 'Categories',
+    method: 'POST',
+  },
+  {
+    description: 'Update Category',
+    route: '/api/categories/:id',
+    auth: true,
+    name: 'Categories',
+    method: 'PUT',
+  },
+  {
+    description: 'Delete Category',
+    route: '/api/categories/:id',
+    auth: true,
+    name: 'Categories',
+    method: 'DELETE',
+  },
+
+  // participants endpoint
+  {
+    description: 'Get All Participants',
+    route: '/api/participants',
+    auth: true,
+    name: 'Participants',
+    method: 'GET',
+  },
+  {
+    description: 'Create Participant',
+    route: '/api/participants',
+    auth: true,
+    name: 'Participants',
+    method: 'POST',
+  },
+  {
+    description: 'Update Participant',
+    route: '/api/participants/:id',
+    auth: true,
+    name: 'Participants',
+    method: 'PUT',
+  },
+  {
+    description: 'Delete Participant',
+    route: '/api/participants/:id',
+    auth: true,
+    name: 'Participants',
+    method: 'DELETE',
+  },
+
+  // meeting endpoint
+  {
+    description: 'Get All Meetings',
+    route: '/api/meetings',
+    auth: true,
+    name: 'Meetings',
+    method: 'GET',
+  },
+  {
+    description: 'Create Participant',
+    route: '/api/meetings',
+    auth: true,
+    name: 'Meetings',
+    method: 'POST',
+  },
+  {
+    description: 'Update Participant',
+    route: '/api/meetings/:id',
+    auth: true,
+    name: 'Meetings',
+    method: 'PUT',
+  },
+  {
+    description: 'Delete Participant',
+    route: '/api/meetings/:id',
+    auth: true,
+    name: 'Meetings',
+    method: 'DELETE',
+  },
+
+  // dashboard endpoint
+  {
+    description: 'Get Dashboard Summary',
+    route: '/api/dashboard',
+    auth: true,
+    name: 'Dashboard',
+    method: 'GET',
   },
 ]
 
