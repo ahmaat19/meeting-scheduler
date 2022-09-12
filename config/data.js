@@ -121,6 +121,20 @@ const clientPermissions = [
     auth: true,
     description: 'Meetings page',
   },
+  {
+    name: 'Meetings',
+    path: '/meetings/[id]',
+    menu: 'hidden',
+    auth: true,
+    description: 'Meetings details page',
+  },
+  {
+    name: 'Meeting Report',
+    path: '/reports/meetings',
+    menu: 'report',
+    auth: true,
+    description: 'Meetings report page',
+  },
 ]
 
 const permissions = [
@@ -390,6 +404,13 @@ const permissions = [
     method: 'GET',
   },
   {
+    description: 'Get Meeting Details',
+    route: '/api/meetings/:id',
+    auth: true,
+    name: 'Meetings',
+    method: 'GET',
+  },
+  {
     description: 'Create Participant',
     route: '/api/meetings',
     auth: true,
@@ -417,6 +438,15 @@ const permissions = [
     route: '/api/dashboard',
     auth: true,
     name: 'Dashboard',
+    method: 'GET',
+  },
+
+  // reports endpoint
+  {
+    description: 'Get Meetings Report',
+    route: '/api/reports/meetings',
+    auth: true,
+    name: 'Report',
     method: 'GET',
   },
 ]

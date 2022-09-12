@@ -9,7 +9,26 @@ const schemaName = Meeting
 const schemaNameString = 'Meeting'
 
 const handler = nc()
-// handler.use(isAuth)
+handler.use(isAuth)
+
+handler.get(async (req, res) => {
+  await db()
+  try {
+    const { id } = req.query
+    const object = await schemaName
+      .findById(id)
+      .populate('category')
+      .populate('participants')
+
+    if (!object)
+      return res.status(400).json({ error: `${schemaNameString} not found` })
+
+    res.send(object)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
 handler.put(async (req, res) => {
   await db()
   try {

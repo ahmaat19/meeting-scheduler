@@ -16,6 +16,12 @@ export default function useMeetingsHook(props) {
     { retry: 3 }
   )
 
+  const getMeetingById = useQuery(
+    [`meeting-${id}`],
+    async () => await dynamicAPI('get', `${url}/${id}`, {}),
+    { retry: 3, enabled: !!id }
+  )
+
   const updateMeeting = useMutation(
     async (obj) => await dynamicAPI('put', `${url}/${obj._id}`, obj),
     {
@@ -45,5 +51,6 @@ export default function useMeetingsHook(props) {
     updateMeeting,
     deleteMeeting,
     postMeeting,
+    getMeetingById,
   }
 }

@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import withAuth from '../HOC/withAuth'
+import withAuth from '../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
-import useMeetingsHook from '../api/meetings'
-import useCategoriesHook from '../api/categories'
-import useParticipantsHook from '../api/participants'
-import { Spinner, Pagination, Message, Confirm } from '../components'
+import useMeetingsHook from '../../api/meetings'
+import useCategoriesHook from '../../api/categories'
+import useParticipantsHook from '../../api/participants'
+import { Spinner, Pagination, Message, Confirm } from '../../components'
 import {
   dynamicInputSelect,
   inputDateTime,
   inputText,
   inputTextArea,
   staticInputSelect,
-} from '../utils/dynamicForm'
-import TableView from '../components/TableView'
-import FormView from '../components/FormView'
+} from '../../utils/dynamicForm'
+import TableView from '../../components/TableView'
+import FormView from '../../components/FormView'
 import moment from 'moment'
 
 const Meetings = () => {

@@ -31,7 +31,7 @@ handler.get(async (req, res) => {
 
     const meetingParticipants = await Meeting.find({}, { participants: 1 })
       .lean()
-      .populate('participants', ['name', 'email'])
+      .populate('participants', ['name', 'email', 'title'])
 
     let result = []
     meetingParticipants?.forEach((obj) => {
