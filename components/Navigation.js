@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
@@ -67,11 +68,11 @@ const Navigation = () => {
 
   const menus = () => {
     const dropdownItems =
-      customLocalStorage() &&
-      customLocalStorage().userAccessRoutes &&
-      customLocalStorage().userAccessRoutes.clientPermission &&
-      customLocalStorage().userAccessRoutes.clientPermission.map(
-        (route) => route.menu
+      customLocalStorage()?.userAccessRoutes?.clientPermission?.map(
+        (route) => ({
+          menu: route.menu,
+          orderId: route.orderId,
+        })
       )
 
     const menuItems =
@@ -84,14 +85,25 @@ const Navigation = () => {
 
     const dropdownArray =
       dropdownItems &&
-      dropdownItems.filter((item) => item !== 'hidden' && item !== 'normal')
+      dropdownItems.filter(
+        (item) => item?.menu !== 'hidden' && item?.menu !== 'normal'
+      )
 
-    const uniqueDropdowns = [...new Set(dropdownArray)]
-
-    return { uniqueDropdowns, menuItems }
+    const uniqueDropdowns = dropdownArray.reduce((a, b) => {
+      var i = a.findIndex((x) => x.menu === b.menu)
+      return (
+        i === -1 ? a.push({ menu: b.menu, ...b, times: 1 }) : a[i].times++, a
+      )
+    }, [])
+    return {
+      uniqueDropdowns: uniqueDropdowns.sort((a, b) => b.orderId - a.orderId),
+      menuItems: menuItems.sort((a, b) => b.orderId - a.orderId),
+    }
   }
 
-  menus()
+  useEffect(() => {
+    menus()
+  }, [])
 
   const authItems = () => {
     return (
@@ -113,7 +125,7 @@ const Navigation = () => {
 
           {menus() &&
             menus().uniqueDropdowns.map((item) => (
-              <li key={item} className='nav-item dropdown'>
+              <li key={item?.menu} className='nav-item dropdown'>
                 <a
                   className='nav-link dropdown-toggle'
                   href='#'
@@ -122,9 +134,10 @@ const Navigation = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  {item === 'profile'
+                  {item?.menu === 'profile'
                     ? user() && user().name
-                    : item.charAt(0).toUpperCase() + item.substring(1)}
+                    : item?.menu.charAt(0).toUpperCase() +
+                      item?.menu.substring(1)}
                 </a>
                 <ul
                   className='dropdown-menu border-0'
@@ -133,7 +146,7 @@ const Navigation = () => {
                   {menus() &&
                     menus().menuItems.map(
                       (menu) =>
-                        menu.menu === item && (
+                        menu.menu === item?.menu && (
                           <li key={menu._id}>
                             <Link href={menu.path}>
                               <a className='dropdown-item'>{menu.name}</a>
