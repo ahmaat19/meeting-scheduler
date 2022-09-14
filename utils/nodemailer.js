@@ -12,7 +12,7 @@ export const sendEmail = (options) => {
   })
 
   const mailOptions = {
-    from: `"Websom Team " <${process.env.SMTP_USER}>`,
+    from: `${options?.organization.toString()} <${process.env.SMTP_USER}>`,
     to: options.to,
     subject: options.subject,
     html: options.text,

@@ -46,11 +46,20 @@ export default function useMeetingsHook(props) {
     }
   )
 
+  const sendEmailMeeting = useMutation(
+    async (obj) => await dynamicAPI('post', `${url}/email`, obj),
+    {
+      retry: 0,
+      onSuccess: () => queryClient.invalidateQueries([queryKey]),
+    }
+  )
+
   return {
     getMeetings,
     updateMeeting,
     deleteMeeting,
     postMeeting,
     getMeetingById,
+    sendEmailMeeting,
   }
 }

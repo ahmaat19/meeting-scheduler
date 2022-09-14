@@ -1,6 +1,12 @@
 import moment from 'moment'
 import Image from 'next/image'
-import { FaCheckCircle, FaPenAlt, FaTimesCircle, FaTrash } from 'react-icons/fa'
+import {
+  FaCheckCircle,
+  FaEnvelope,
+  FaPenAlt,
+  FaTimesCircle,
+  FaTrash,
+} from 'react-icons/fa'
 import Search from './Search'
 
 const TableView = (props) => {
@@ -17,6 +23,8 @@ const TableView = (props) => {
   const searchPlaceholder = props?.searchPlaceholder
   const searchInput = props?.searchInput
   const addBtn = props?.addBtn
+  const sendEmail = props?.sendEmail
+  const isLoadingEmail = props?.isLoadingEmail
 
   function getDeepObjValue(item, s) {
     return s.split('.').reduce((p, c) => {
@@ -153,6 +161,21 @@ const TableView = (props) => {
                           ) : (
                             <span>
                               <FaTrash />
+                            </span>
+                          )}
+                        </button>
+                      )}
+                      {sendEmail && (
+                        <button
+                          className='btn btn-warning btn-sm ms-1'
+                          onClick={() => sendEmail(item)}
+                          disabled={isLoadingEmail}
+                        >
+                          {isLoadingEmail ? (
+                            <span className='spinner-border spinner-border-sm' />
+                          ) : (
+                            <span>
+                              <FaEnvelope className='mb-1' /> Send
                             </span>
                           )}
                         </button>

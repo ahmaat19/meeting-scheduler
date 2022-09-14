@@ -25,11 +25,16 @@ const Meetings = () => {
   const [edit, setEdit] = useState(false)
   const [q, setQ] = useState('')
 
-  const { getMeetings, postMeeting, updateMeeting, deleteMeeting } =
-    useMeetingsHook({
-      page,
-      q,
-    })
+  const {
+    getMeetings,
+    postMeeting,
+    updateMeeting,
+    deleteMeeting,
+    sendEmailMeeting,
+  } = useMeetingsHook({
+    page,
+    q,
+  })
   const { getCategories } = useCategoriesHook({
     page: 1,
     limit: 1000000,
@@ -79,6 +84,14 @@ const Meetings = () => {
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
   } = postMeeting
+
+  const {
+    isLoading: isLoadingEmail,
+    isError: isErrorEmail,
+    error: errorEmail,
+    isSuccess: isSuccessEmail,
+    mutateAsync: mutateAsyncEmail,
+  } = sendEmailMeeting
 
   useEffect(() => {
     if (isSuccessPost || isSuccessUpdate) formCleanHandler()
@@ -226,6 +239,10 @@ const Meetings = () => {
   const column = 'col-md-6 col-12'
   const modalSize = 'modal-lg'
 
+  const sendEmail = (obj) => {
+    mutateAsyncEmail(obj)
+  }
+
   return (
     <>
       <Head>
@@ -251,6 +268,11 @@ const Meetings = () => {
         </Message>
       )}
       {isErrorPost && <Message variant='danger'>{errorPost}</Message>}
+
+      {isSuccessEmail && (
+        <Message variant='success'>Email has been sent successfully.</Message>
+      )}
+      {isErrorEmail && <Message variant='danger'>{errorEmail}</Message>}
 
       <div className='ms-auto text-end'>
         <Pagination data={table.data} setPage={setPage} />
@@ -291,6 +313,8 @@ const Meetings = () => {
           searchPlaceholder={searchPlaceholder}
           searchInput={true}
           addBtn={true}
+          sendEmail={sendEmail}
+          isLoadingEmail={isLoadingEmail}
         />
       )}
     </>

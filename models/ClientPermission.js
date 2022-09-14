@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const ClientPermissionScheme = mongoose.Schema(
   {
     name: { type: String, required: true },
-    orderId: { type: String, required: true },
+    sort: { type: Number, required: true },
     menu: { type: String, required: true },
     path: { type: String, required: true },
     description: String,

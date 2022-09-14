@@ -71,33 +71,29 @@ const Navigation = () => {
       customLocalStorage()?.userAccessRoutes?.clientPermission?.map(
         (route) => ({
           menu: route.menu,
-          orderId: route.orderId,
+          sort: route.sort,
         })
       )
 
     const menuItems =
-      customLocalStorage() &&
-      customLocalStorage().userAccessRoutes &&
-      customLocalStorage().userAccessRoutes.clientPermission &&
-      customLocalStorage().userAccessRoutes.clientPermission.map(
+      customLocalStorage()?.userAccessRoutes?.clientPermission?.map(
         (route) => route
       )
 
-    const dropdownArray =
-      dropdownItems &&
-      dropdownItems.filter(
-        (item) => item?.menu !== 'hidden' && item?.menu !== 'normal'
-      )
+    const dropdownArray = dropdownItems?.filter(
+      (item) => item?.menu !== 'hidden' && item?.menu !== 'normal'
+    )
 
-    const uniqueDropdowns = dropdownArray.reduce((a, b) => {
+    const uniqueDropdowns = dropdownArray?.reduce((a, b) => {
       var i = a.findIndex((x) => x.menu === b.menu)
       return (
         i === -1 ? a.push({ menu: b.menu, ...b, times: 1 }) : a[i].times++, a
       )
     }, [])
+
     return {
-      uniqueDropdowns: uniqueDropdowns.sort((a, b) => b.orderId - a.orderId),
-      menuItems: menuItems.sort((a, b) => b.orderId - a.orderId),
+      uniqueDropdowns: uniqueDropdowns?.sort((a, b) => b?.sort - a?.sort),
+      menuItems: menuItems?.sort((a, b) => b?.sort - a?.sort),
     }
   }
 

@@ -44,9 +44,6 @@ handler.put(async (req, res) => {
       location,
     } = req.body
 
-    // console.log(req.body)
-    // console.log(req.query)
-
     if (moment(start).format() > moment(end).format())
       return res
         .status(400)
